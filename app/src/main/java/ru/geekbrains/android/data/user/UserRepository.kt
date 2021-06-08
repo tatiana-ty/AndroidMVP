@@ -1,5 +1,6 @@
 package ru.geekbrains.android.data.user
 
+import io.reactivex.rxjava3.core.Single
 import ru.geekbrains.android.data.user.model.GithubUser
 
 interface UserRepository {
@@ -8,6 +9,8 @@ interface UserRepository {
      * Возвращает список пользователей.
      * @return список пользователей
      */
-    fun getUsers(): List<GithubUser>
+    fun getUsers(): Single<List<GithubUser>>
+
+    fun getUserByLogin(login: String): Single<GithubUser>
 
 }

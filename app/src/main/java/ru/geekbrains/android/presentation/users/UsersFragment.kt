@@ -1,34 +1,31 @@
 package ru.geekbrains.android.presentation.users
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import ru.geekbrains.android.GithubApplication.Navigation.router
-import ru.geekbrains.android.arguments
 import ru.geekbrains.android.R.layout.fragment_users
+import ru.geekbrains.android.arguments
 import ru.geekbrains.android.data.user.UserRepositoryFactory
 import ru.geekbrains.android.data.user.model.GithubUser
 import ru.geekbrains.android.databinding.FragmentUsersBinding
+import ru.geekbrains.android.presentation.UserInteractor
 import ru.geekbrains.android.presentation.users.adapter.UsersAdapter
 
 class UsersFragment : MvpAppCompatFragment(fragment_users), UsersView, UsersAdapter.Delegate {
 
     companion object {
-
         fun newInstance(): Fragment =
             UsersFragment()
                 .arguments()
-
     }
 
     private val presenter: UsersPresenter by moxyPresenter {
         UsersPresenter(
-            userRepository = UserRepositoryFactory.create(),
+            interactor = UserInteractor(UserRepositoryFactory.create()),
             router = router
         )
     }
