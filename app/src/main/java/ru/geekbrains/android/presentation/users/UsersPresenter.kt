@@ -1,6 +1,7 @@
 package ru.geekbrains.android.presentation.users
 
 import com.github.terrakok.cicerone.Router
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 import moxy.MvpPresenter
 import ru.geekbrains.android.data.user.model.GithubUser
 import ru.geekbrains.android.presentation.UserInteractor
@@ -11,13 +12,17 @@ class UsersPresenter(
     private val router: Router
 ) : MvpPresenter<UsersView>() {
 
+    private var disposables = CompositeDisposable()
+
     override fun onFirstViewAttach() {
-        interactor
-            .getUsers()
-            .subscribe(
-                ::onSuccess,
-                ::onError
-            )
+        disposables.add(
+            interactor
+                .getUsers()
+                .subscribe(
+                    ::onSuccess,
+                    ::onError
+                )
+        )
     }
 
     fun displayUser(user: GithubUser) =
@@ -28,6 +33,12 @@ class UsersPresenter(
     }
 
     private fun onError(error: Throwable) {
+        viewState.showError(error.message)
+        router.exit()
+    }
 
+    override fun onDestroy() {
+        disposables.dispose()
+        super.onDestroy()
     }
 }

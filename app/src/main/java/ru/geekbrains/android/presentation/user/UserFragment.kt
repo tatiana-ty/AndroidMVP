@@ -1,10 +1,12 @@
 package ru.geekbrains.android.presentation.user
 
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import ru.gb.gb_popular_libs.lession2.presentation.user.UserView
+import ru.geekbrains.android.GithubApplication
 import ru.geekbrains.android.R.layout.fragment_user
 import ru.geekbrains.android.arguments
 import ru.geekbrains.android.data.user.UserRepositoryFactory
@@ -30,7 +32,8 @@ class UserFragment : MvpAppCompatFragment(fragment_user), UserView {
     private val presenter by moxyPresenter {
         UserPresenter(
             userLogin,
-            interactor = UserInteractor(UserRepositoryFactory.create())
+            interactor = UserInteractor(UserRepositoryFactory.create()),
+            router = GithubApplication.Navigation.router
         )
     }
 
@@ -38,6 +41,10 @@ class UserFragment : MvpAppCompatFragment(fragment_user), UserView {
 
     override fun showUser(user: GithubUser) {
         binding.userLogin.text = user.login
+    }
+
+    override fun showError(message: String?) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
     }
 
 }

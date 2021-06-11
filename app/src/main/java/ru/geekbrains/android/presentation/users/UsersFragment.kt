@@ -2,6 +2,7 @@ package ru.geekbrains.android.presentation.users
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
 import moxy.MvpAppCompatFragment
@@ -45,4 +46,7 @@ class UsersFragment : MvpAppCompatFragment(fragment_users), UsersView, UsersAdap
     override fun onUserPicked(user: GithubUser) =
         presenter.displayUser(user)
 
+    override fun showError(message: String?) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
+    }
 }
