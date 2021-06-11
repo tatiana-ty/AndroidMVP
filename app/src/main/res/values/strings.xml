@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">AndroidMVP</string>
     <string name="user_login_title">Логин</string>
+    <string name="user_not_found">Пользователь не найден</string>
 </resources>
