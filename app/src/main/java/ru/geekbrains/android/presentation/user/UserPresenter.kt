@@ -10,7 +10,7 @@ import ru.geekbrains.android.presentation.repo.RepoScreen
 import ru.geekbrains.android.schedulers.Schedulers
 
 class UserPresenter(
-    private val userId: String,
+    private val userLogin: String,
     private val userRepository: UserRepository,
     private val schedulers: Schedulers,
     private val router: Router
@@ -21,7 +21,7 @@ class UserPresenter(
     override fun onFirstViewAttach() {
         disposables.add(
             userRepository
-                .getUserByLogin(userId)
+                .getUserByLogin(userLogin)
                 .observeOn(schedulers.main())
                 .subscribeOn(schedulers.background())
                 .subscribe(
@@ -29,6 +29,8 @@ class UserPresenter(
                     ::onFetchUserByIdError
                 )
         )
+
+        displayRepos(userLogin)
     }
 
     private fun onFetchUserByIdSuccess(user: GitHubUser) {
@@ -46,8 +48,29 @@ class UserPresenter(
         router.exit()
     }
 
+    private fun displayRepos(login: String) {
+        disposables.add(
+            userRepository
+                .getUserRepositories(login)
+                .observeOn(schedulers.main())
+                .subscribeOn(schedulers.background())
+                .subscribe(
+                    ::onSuccess,
+                    ::onError
+                )
+        )
+    }
+
+    private fun onSuccess(repos: List<GitHubUserRepository>) {
+        viewState.showRepos(repos)
+    }
+
+    private fun onError(error: Throwable) {
+        viewState.showError(error.message)
+    }
+
     fun displayRepo(repo: GitHubUserRepository) =
-        router.navigateTo(RepoScreen(repo.name))
+        router.navigateTo(RepoScreen(repo))
 
     override fun onDestroy() {
         super.onDestroy()

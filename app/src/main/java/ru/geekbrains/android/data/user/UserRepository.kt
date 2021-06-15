@@ -19,6 +19,6 @@ interface UserRepository {
      */
     fun getUserByLogin(login: String): Observable<GitHubUser>
 
-    fun getRepoByName(login: String, repoName: String): Observable<GitHubUserRepository>
+    fun getUserRepositories(login: String): Observable<List<GitHubUserRepository>>
 
 }

@@ -62,6 +62,11 @@ class UserFragment : MvpAppCompatFragment(fragment_user), UserView, ReposAdapter
             }
             .root
 
+    override fun showRepos(repos: List<GitHubUserRepository>) {
+        reposAdapter.submitList(repos)
+        viewBinding?.repos?.visibility = View.VISIBLE
+    }
+
     override fun showUser(user: GitHubUser) {
         viewBinding?.userId?.text = user.id
         viewBinding?.userName?.text = user.login

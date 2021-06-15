@@ -36,15 +36,8 @@ class UserRepositoryImpl(
                 .toObservable()
         )
 
-    override fun getRepoByName(login: String, repoName: String): Observable<GitHubUserRepository> {
-        val repoList = Observable.concat(
-            cacheUserDataSource
-                .getUserRepositories(login)
-                .toObservable(),
-            cloudUserDataSource
-                .getUserRepositories(login)
-                .toObservable()
-        )
-        repoList.subscribe()
-    }
+    override fun getUserRepositories(login: String): Observable<List<GitHubUserRepository>> =
+        cloudUserDataSource
+            .getUserRepositories(login)
+            .toObservable()
 }

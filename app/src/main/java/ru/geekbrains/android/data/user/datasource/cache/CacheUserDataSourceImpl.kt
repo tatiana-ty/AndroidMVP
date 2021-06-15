@@ -20,8 +20,8 @@ class CacheUserDataSourceImpl : CacheUserDataSource {
                 ?: Single.error(RuntimeException("Нет такого пользователя"))
         }
 
-    override fun getUserRepositories(login: String): Observable<List<GitHubUserRepository>> =
-        Observable.just(cacheRepos)
+    override fun getUserRepositories(login: String): Single<List<GitHubUserRepository>> =
+        Single.just(cacheRepos)
 
     override fun retain(users: List<GitHubUser>): Single<List<GitHubUser>> =
         Single.fromCallable {
