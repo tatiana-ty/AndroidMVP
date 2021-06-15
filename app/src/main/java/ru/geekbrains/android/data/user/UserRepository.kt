@@ -1,8 +1,8 @@
 package ru.geekbrains.android.data.user
 
-import io.reactivex.rxjava3.core.Maybe
-import io.reactivex.rxjava3.core.Single
-import ru.geekbrains.android.data.user.model.GithubUser
+import io.reactivex.Observable
+import ru.geekbrains.android.data.user.model.GitHubUser
+import ru.geekbrains.android.data.user.model.GitHubUserRepository
 
 interface UserRepository {
 
@@ -10,8 +10,15 @@ interface UserRepository {
      * Возвращает список пользователей.
      * @return список пользователей
      */
-    fun getUsers(): Single<List<GithubUser>>
+    fun getUsers(): Observable<List<GitHubUser>>
 
-    fun getUserByLogin(login: String): Maybe<GithubUser>
+    /**
+     * Возвращает пользователя по логину.
+     * @param login логин пользователя
+     * @return пользователь
+     */
+    fun getUserByLogin(login: String): Observable<GitHubUser>
+
+    fun getRepoByName(login: String, repoName: String): Observable<GitHubUserRepository>
 
 }

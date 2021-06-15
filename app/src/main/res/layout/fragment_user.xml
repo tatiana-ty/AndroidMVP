@@ -7,24 +7,63 @@
     android:padding="16dp">
 
     <TextView
-        android:id="@+id/user_login_title"
+        android:id="@+id/user_id_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/user_login_title"
+        android:text="@string/user_id_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/user_login"
+        android:id="@+id/user_id"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/user_login_title"
+        app:layout_constraintTop_toBottomOf="@+id/user_id_title"
         android:textSize="24sp"
         android:textColor="@android:color/black"
         tools:text="User1" />
+
+    <TextView
+        android:id="@+id/user_name_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/user_name_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_id" />
+
+    <TextView
+        android:id="@+id/user_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_name_title"
+        android:textSize="24sp"
+        android:textColor="@android:color/black"
+        tools:text="User1" />
+
+    <TextView
+        android:id="@+id/user_repos_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/user_repos_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_name" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/repos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/user_repos_title"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
