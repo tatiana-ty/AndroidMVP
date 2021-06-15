@@ -3,10 +3,11 @@ package ru.geekbrains.android.presentation.users.adapter
 import android.view.LayoutInflater.from
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import ru.geekbrains.android.data.user.model.GithubUser
+import ru.geekbrains.android.data.user.model.GitHubUser
 import ru.geekbrains.android.databinding.ViewUserBinding
 
-class UsersAdapter(private val delegate: Delegate?): ListAdapter<GithubUser, UserViewHolder>(UserDiffing) {
+class UsersAdapter(private val delegate: Delegate?) :
+    ListAdapter<GitHubUser, UserViewHolder>(UserDiffing) {
 
     interface Delegate {
 
@@ -15,7 +16,7 @@ class UsersAdapter(private val delegate: Delegate?): ListAdapter<GithubUser, Use
          * пользователя из списка.
          * @param user пользователь
          */
-        fun onUserPicked(user: GithubUser)
+        fun onUserPicked(user: GitHubUser)
 
     }
 

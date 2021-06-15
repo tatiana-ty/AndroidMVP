@@ -2,9 +2,11 @@ package ru.geekbrains.android.presentation
 
 import android.os.Bundle
 import com.github.terrakok.cicerone.androidx.AppNavigator
+import io.reactivex.disposables.CompositeDisposable
 import moxy.MvpAppCompatActivity
 import ru.geekbrains.android.GithubApplication.Navigation.navigatorHolder
 import ru.geekbrains.android.GithubApplication.Navigation.router
+import ru.geekbrains.android.NetworkStateObservable
 import ru.geekbrains.android.R
 import ru.geekbrains.android.R.layout.activity_main
 import ru.geekbrains.android.presentation.users.UsersScreen

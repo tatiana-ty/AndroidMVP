@@ -2,7 +2,7 @@ package ru.geekbrains.android.presentation.users
 
 import moxy.MvpView
 import moxy.viewstate.strategy.alias.SingleState
-import ru.geekbrains.android.data.user.model.GithubUser
+import ru.geekbrains.android.data.user.model.GitHubUser
 
 interface UsersView : MvpView {
 
@@ -11,7 +11,7 @@ interface UsersView : MvpView {
      * @param users список пользователей
      */
     @SingleState
-    fun showUsers(users: List<GithubUser>)
+    fun showUsers(users: List<GitHubUser>)
 
     /**
      * Показывает ошибку.
@@ -20,4 +20,9 @@ interface UsersView : MvpView {
     @SingleState
     fun showError(message: String?)
 
+    /**
+     * Показывает процесс загрузки.
+     */
+    @SingleState
+    fun showLoading()
 }
